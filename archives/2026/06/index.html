@@ -134,6 +134,14 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
   </nav>
 </div>
 
@@ -168,14 +176,14 @@
     <header class="post-header">
       <div class="post-meta-container">
         <time itemprop="dateCreated"
-              datetime="2026-06-14T20:51:11+08:00"
-              content="2026-06-14">
-          06-14
+              datetime="2026-06-16T10:00:00+08:00"
+              content="2026-06-16">
+          06-16
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2026/06/14/hello-world/" itemprop="url">
+          <a class="post-title-link" href="/2026/06/16/hello-world/" itemprop="url">
             <span itemprop="name">English Game Download</span>
           </a>
       </div>
@@ -226,6 +234,115 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<!-- 加载 SweetAlert2 库 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 获取所有下载按钮（匹配 NexT 主题的 .btn）
+  const btns = document.querySelectorAll('.post-body .btn');
+
+  // 判断当前语言
+  function getCurrentLang() {
+    const htmlLang = document.documentElement.lang;
+    if (htmlLang && htmlLang.startsWith('en')) return 'en';
+    if (window.location.pathname.startsWith('/en/')) return 'en';
+    return 'zh';
+  }
+
+  // 根据语言获取协议文本（通过 fetch 加载外部文件）
+  async function fetchEula(lang) {
+    const url = lang === 'en' ? '/eula/en.txt' : '/eula/zh.txt';
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to load EULA');
+    return response.text();
+  }
+
+  // 将纯文本转换为 HTML 格式（保留换行和段落）
+  function textToHtml(text) {
+    // 转义 HTML 特殊字符（防止注入）
+    const escape = (str) => {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    };
+    // 按行分割，转换为 <p> 或 <br>
+    const lines = text.split('\n').map(line => line.trim());
+    let html = '';
+    let inList = false;
+    for (let line of lines) {
+      if (line === '') {
+        if (inList) { html += '</ul>'; inList = false; }
+        continue;
+      }
+      // 检测列表项（以数字或短横开头）
+      if (/^\d+\.\s/.test(line) || /^-\s/.test(line)) {
+        if (!inList) { html += '<ul style="list-style-type: decimal; padding-left:20px;">'; inList = true; }
+        html += `<li>${escape(line.replace(/^\d+\.\s/, '').replace(/^-\s/, ''))}</li>`;
+      } else {
+        if (inList) { html += '</ul>'; inList = false; }
+        // 检测标题（以 "English Game" 或 "欢迎" 开头）
+        if (/^(English Game|欢迎使用)/.test(line)) {
+          html += `<h3 style="text-align:center;">${escape(line)}</h3>`;
+        } else if (/^[1-6]\.\s/.test(line)) {
+          // 条款标题
+          html += `<p><strong>${escape(line)}</strong></p>`;
+        } else {
+          html += `<p>${escape(line)}</p>`;
+        }
+      }
+    }
+    if (inList) html += '</ul>';
+    return html;
+  }
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const downloadUrl = this.href;
+      const lang = getCurrentLang();
+
+      // 显示加载状态
+      Swal.fire({
+        title: lang === 'en' ? 'Loading Agreement...' : '加载协议中...',
+        text: lang === 'en' ? 'Please wait...' : '请稍候...',
+        allowOutsideClick: false,
+        didOpen: () => { Swal.showLoading(); }
+      });
+
+      // 加载协议文本
+      fetchEula(lang)
+        .then(text => {
+          const htmlContent = textToHtml(text);
+          Swal.fire({
+            title: lang === 'en' ? 'User Agreement' : '用户协议',
+            html: `<div style="text-align:left; max-height:400px; overflow-y:auto; padding:0 10px;">${htmlContent}</div>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: lang === 'en' ? 'I Agree' : '我同意',
+            cancelButtonText: lang === 'en' ? 'Cancel' : '取消',
+            reverseButtons: true,
+            width: 650,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = downloadUrl;
+            } else {
+              window.location.href = 'https://j-e-f-f-r-e-y.github.io';
+            }
+          });
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: lang === 'en' ? 'Error' : '错误',
+            text: lang === 'en' ? 'Failed to load agreement. Please try again later.' : '加载协议失败，请稍后重试。'
+          });
+        });
+    });
+  });
+});
+</script>
 </body>
 </html>
