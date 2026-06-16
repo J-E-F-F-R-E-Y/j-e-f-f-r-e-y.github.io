@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #5ccbb1;
+  background: #4711ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2509,8 +2509,11 @@ header.header {
     left: 320px;
   }
 }
+:root {
+  --body-bg-color: #fffaf0 !important;
+}
 body {
-  background-color: #000 !important;
+  background-color: #fffaf0 !important;
 }
 a {
   color: #f60;
