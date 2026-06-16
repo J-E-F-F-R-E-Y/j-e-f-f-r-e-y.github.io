@@ -1384,7 +1384,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #75ffff;
+  background: #34c1e0;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2719,7 +2719,7 @@ header.header {
   }
 }
 body {
-  background-color: #f0f8ff !important;
+  background-color: #000 !important;
 }
 a {
   color: #f60;
