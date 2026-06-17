@@ -3,10 +3,10 @@ English Game End User License Agreement (EULA)
 This End User License Agreement ("Agreement") is a legal agreement between you ("User") and the developer of English Game ("Licensor") regarding the download, installation, and use of the software. By downloading, installing, or using the software, you agree to be bound by the terms of this Agreement.
 
 1. Grant of License
-   The Licensor grants you a personal, non-exclusive, non-transferable, revocable, limited license to install and use the software on your personal devices for personal, non-commercial purposes only[reference:8].
+   The Licensor grants you a personal, non-exclusive, non-transferable, revocable, limited license to install and use the software on your personal devices for personal, non-commercial purposes only.
 
 2. Intellectual Property Rights
-   All intellectual property rights, including copyrights, trademarks, and patents, in and to the software (including but not limited to its code, interface, text, graphics, audio, and video content) are owned by the Licensor. This Agreement is a license, not a sale, and you only have the right to use the software[reference:9]. You must not remove, alter, or obscure any copyright, trademark, or other proprietary rights notices contained in the software.
+   All intellectual property rights, including copyrights, trademarks, and patents, in and to the software (including but not limited to its code, interface, text, graphics, audio, and video content) are owned by the Licensor. This Agreement is a license, not a sale, and you only have the right to use the software. You must not remove, alter, or obscure any copyright, trademark, or other proprietary rights notices contained in the software.
 
 3. Usage Restrictions
    You agree NOT to:
@@ -16,7 +16,7 @@ This End User License Agreement ("Agreement") is a legal agreement between you (
    *   Use the software to engage in any activity that harms the legitimate rights and interests of others.
 
 4. User Responsibilities
-   You are solely responsible for all activities conducted through the software[reference:10]. You must not impersonate any other person or entity, nor maliciously use the software in a way that could mislead other users[reference:11].
+   You are solely responsible for all activities conducted through the software. You must not impersonate any other person or entity, nor maliciously use the software in a way that could mislead other users.
 
 5. Disclaimer of Warranty
    The software is provided on an "AS IS" and "AS AVAILABLE" basis, without warranty of any kind, either express or implied. The Licensor does not warrant that the software will meet your requirements or that its operation will be uninterrupted or error-free. Use of the software is at your own risk.
