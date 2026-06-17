@@ -144,6 +144,7 @@
     var switcher = document.getElementById('lang-select');
     if (!switcher) return;
     var path = window.location.pathname;
+    // 如果路径以 /en/ 开头，选中英文，否则中文
     if (path.startsWith('/en/')) {
       switcher.value = 'en';
     } else {
@@ -299,6 +300,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // 选择所有 .btn，但过滤掉非下载按钮（通过 href 或文本）
   const btns = document.querySelectorAll('.post-body .btn');
 
   function getCurrentLang() {
@@ -321,33 +323,17 @@ document.addEventListener('DOMContentLoaded', function() {
       div.textContent = str;
       return div.innerHTML;
     };
-    const lines = text.split('\n').map(line => line.trim());
-    let html = '';
-    let inList = false;
-    for (let line of lines) {
-      if (line === '') {
-        if (inList) { html += '</ul>'; inList = false; }
-        continue;
-      }
-      if (/^\d+\.\s/.test(line) || /^-\s/.test(line)) {
-        if (!inList) { html += '<ul style="list-style-type: decimal; padding-left:20px;">'; inList = true; }
-        html += `<li>${escape(line.replace(/^\d+\.\s/, '').replace(/^-\s/, ''))}</li>`;
-      } else {
-        if (inList) { html += '</ul>'; inList = false; }
-        if (/^(English Game|欢迎使用)/.test(line)) {
-          html += `<h3 style="text-align:center;">${escape(line)}</h3>`;
-        } else if (/^[1-6]\.\s/.test(line)) {
-          html += `<p><strong>${escape(line)}</strong></p>`;
-        } else {
-          html += `<p>${escape(line)}</p>`;
-        }
-      }
-    }
-    if (inList) html += '</ul>';
-    return html;
+    return `<pre style="white-space: pre-wrap; font-family: inherit; font-size: 0.95em; line-height: 1.6; margin: 0; padding: 0 10px;">${escape(text)}</pre>`;
   }
 
   btns.forEach(function(btn) {
+    // 只处理下载链接：检查 href 是否包含 /releases/download/，且按钮文本不包含"阅读全文"
+    const href = btn.getAttribute('href') || '';
+    const text = btn.textContent.trim();
+    if (!href.includes('/releases/download/') || text.includes('阅读全文') || text.includes('Read more')) {
+      return;
+    }
+
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       const downloadUrl = this.href;
@@ -365,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const htmlContent = textToHtml(text);
           Swal.fire({
             title: lang === 'en' ? 'User Agreement' : '用户协议',
-            html: `<div style="text-align:left; max-height:400px; overflow-y:auto; padding:0 10px;">${htmlContent}</div>`,
+            html: `<div style="max-height:400px; overflow-y:auto;">${htmlContent}</div>`,
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: lang === 'en' ? 'I Agree' : '我同意',
@@ -378,7 +364,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (result.isConfirmed) {
               window.location.href = downloadUrl;
             } else {
-              window.location.href = 'https://j-e-f-f-r-e-y.github.io';
+              // 使用相对路径，避免重定向到英文版
+              window.location.href = '/';
             }
           });
         })
