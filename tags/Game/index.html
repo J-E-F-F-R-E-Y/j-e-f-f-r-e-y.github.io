@@ -246,7 +246,7 @@
 
       <div class="post-title">
           <a class="post-title-link" href="/2026/06/16/hello-world/" itemprop="url">
-            <span itemprop="name">English Game Download</span>
+            <span itemprop="name">英文游戏下载</span>
           </a>
       </div>
 
@@ -300,13 +300,13 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 选择所有 .btn，但过滤掉非下载按钮（通过 href 或文本）
   const btns = document.querySelectorAll('.post-body .btn');
 
   function getCurrentLang() {
-    const htmlLang = document.documentElement.lang;
-    if (htmlLang && htmlLang.startsWith('en')) return 'en';
-    if (window.location.pathname.startsWith('/en/')) return 'en';
+    // 仅根据 URL 路径判断语言
+    if (window.location.pathname.startsWith('/en/')) {
+      return 'en';
+    }
     return 'zh';
   }
 
@@ -327,7 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   btns.forEach(function(btn) {
-    // 只处理下载链接：检查 href 是否包含 /releases/download/，且按钮文本不包含"阅读全文"
     const href = btn.getAttribute('href') || '';
     const text = btn.textContent.trim();
     if (!href.includes('/releases/download/') || text.includes('阅读全文') || text.includes('Read more')) {
@@ -364,7 +363,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (result.isConfirmed) {
               window.location.href = downloadUrl;
             } else {
-              // 使用相对路径，避免重定向到英文版
               window.location.href = '/';
             }
           });

@@ -243,7 +243,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/06/16/hello-world/" class="post-title-link" itemprop="url">English Game Download</a>
+          <a href="/2026/06/16/hello-world/" class="post-title-link" itemprop="url">英文游戏下载</a>
         </h2>
 
         <div class="post-meta-container">
@@ -261,7 +261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-17 18:07:08" itemprop="dateModified" datetime="2026-06-17T18:07:08+08:00">2026-06-17</time>
+      <time title="修改时间：2026-06-17 19:43:15" itemprop="dateModified" datetime="2026-06-17T19:43:15+08:00">2026-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to download English Game! Please select the corresponding installation package based on your operating system.</p>
+          <p>欢迎下载英文游戏！请根据您的操作系统选择相应的安装包。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/06/16/hello-world/#more" rel="contents">
@@ -350,13 +350,13 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 选择所有 .btn，但过滤掉非下载按钮（通过 href 或文本）
   const btns = document.querySelectorAll('.post-body .btn');
 
   function getCurrentLang() {
-    const htmlLang = document.documentElement.lang;
-    if (htmlLang && htmlLang.startsWith('en')) return 'en';
-    if (window.location.pathname.startsWith('/en/')) return 'en';
+    // 仅根据 URL 路径判断语言
+    if (window.location.pathname.startsWith('/en/')) {
+      return 'en';
+    }
     return 'zh';
   }
 
@@ -377,7 +377,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   btns.forEach(function(btn) {
-    // 只处理下载链接：检查 href 是否包含 /releases/download/，且按钮文本不包含"阅读全文"
     const href = btn.getAttribute('href') || '';
     const text = btn.textContent.trim();
     if (!href.includes('/releases/download/') || text.includes('阅读全文') || text.includes('Read more')) {
@@ -414,7 +413,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (result.isConfirmed) {
               window.location.href = downloadUrl;
             } else {
-              // 使用相对路径，避免重定向到英文版
               window.location.href = '/';
             }
           });
