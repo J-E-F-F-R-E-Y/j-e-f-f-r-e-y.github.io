@@ -27,7 +27,7 @@
 <meta property="og:description" content="欢迎下载英文游戏！请根据您的操作系统选择相应的安装包。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-16T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-17T11:43:15.767Z">
+<meta property="article:modified_time" content="2026-06-20T13:38:10.029Z">
 <meta property="article:author" content="JEFFREY">
 <meta property="article:tag" content="Download">
 <meta property="article:tag" content="Game">
@@ -267,7 +267,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-06-17 19:43:15" itemprop="dateModified" datetime="2026-06-17T19:43:15+08:00">2026-06-17</time>
+      <time title="修改时间：2026-06-20 21:38:10" itemprop="dateModified" datetime="2026-06-20T21:38:10+08:00">2026-06-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,13 +292,159 @@
 <span id="more"></span>
 
 <h1 id="Windows7-8-1-10-11"><a href="#Windows7-8-1-10-11" class="headerlink" title="Windows7&#x2F;8.1&#x2F;10&#x2F;11"></a>Windows7&#x2F;8.1&#x2F;10&#x2F;11</h1><hr>
-<a class="btn" target="_blank" rel="noopener" href="https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.exe" title="large"><i class="fa fa-windows"></i>Download for Windows</a>
+<p>
+    <button onclick="openModal('windows')" style="padding:12px 30px; background:#0078d7; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; margin:6px;">⬇ 下载 Windows 版</button>
+</p>
 
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><hr>
-<a class="btn" target="_blank" rel="noopener" href="https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.deb" title="large"><i class="fa fa-linux"></i>Download for Linux</a>
+<p>
+    <button onclick="openModal('linux')" style="padding:12px 30px; background:#f0c040; color:#333; border:none; border-radius:8px; font-size:16px; cursor:pointer; margin:6px;">⬇ 下载 Linux 版</button>
+</p>
 
 <h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><hr>
-<a class="btn" target="_blank" rel="noopener" href="https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.apk" title="large"><i class="fa fa-android"></i>Download for Android</a>
+<p>
+    <button onclick="openModal('android')" style="padding:12px 30px; background:#3ddc84; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer; margin:6px;">⬇ 下载 Android 版</button>
+</p>
+<!-- 版本数据 -->
+<script>
+// 定义版本信息
+const VERSION_DATA = {
+    windows: {
+        version: 'v1.0.0',
+        title: 'EnglishGame v1.0.0 (Windows)',
+        desc: '首个正式版本，包含完整词库（528个单词），支持答题、计分、最高分记录。\n适用于 Windows 7 / 8.1 / 10 / 11。',
+        downloadUrl: 'https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.exe'
+    },
+    linux: {
+        version: 'v1.0.0',
+        title: 'EnglishGame v1.0.0 (Linux)',
+        desc: '首个正式版本，包含完整词库（528个单词），支持答题、计分、最高分记录。\n适用于 Debian / Ubuntu 等 Linux 发行版（.deb 安装包）。',
+        downloadUrl: 'https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.deb'
+    },
+    android: {
+        version: 'v1.0.0',
+        title: 'EnglishGame v1.0.0 (Android)',
+        desc: '首个正式版本，包含完整词库（528个单词），支持答题、计分、最高分记录。\n适用于 Android 5.0 及以上版本。',
+        downloadUrl: 'https://github.com/J-E-F-F-R-E-Y/English/releases/download/v1.0.0/EnglishGame.apk'
+    }
+};
+</script>
+
+<!-- 模态框 HTML -->
+<style>
+#version-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+#version-modal.active {
+    display: flex;
+}
+#version-modal .modal-content {
+    background: #fff;
+    max-width: 500px;
+    width: 90%;
+    padding: 30px 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+#version-modal .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    background: none;
+    border: none;
+}
+#version-modal .modal-close:hover { color: #333; }
+#version-modal .modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+}
+#version-modal .modal-version {
+    color: #3498db;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+#version-modal .modal-body {
+    color: #444;
+    line-height: 1.7;
+    margin: 12px 0 20px;
+    max-height: 250px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 15px;
+}
+#version-modal .modal-download-btn {
+    display: inline-block;
+    background: #27ae60;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+#version-modal .modal-download-btn:hover {
+    background: #1e8449;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+</style>
+
+<!-- 模态框结构 -->
+<div id="version-modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-title" id="modal-title">标题</div>
+        <div class="modal-version" id="modal-version">版本</div>
+        <div class="modal-body" id="modal-body">介绍内容</div>
+        <a href="#" class="modal-download-btn" id="modal-download-btn" target="_blank">⬇ 立即下载</a>
+    </div>
+</div>
+
+<!-- JavaScript：处理下载按钮点击 -->
+<script>
+function openModal(platform) {
+    const data = VERSION_DATA[platform];
+    if (!data) return;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-version').textContent = data.version;
+    document.getElementById('modal-body').textContent = data.desc;
+    document.getElementById('modal-download-btn').href = data.downloadUrl;
+    document.getElementById('version-modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('version-modal').classList.remove('active');
+}
+// 点击模态框外部关闭
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('version-modal');
+    if (e.target === modal) closeModal();
+});
+// ESC 键关闭
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+});
+</script>
     </div>
 
     
