@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #8cffff;
+  background: #8e12a7;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2509,6 +2509,15 @@ header.header {
     left: 320px;
   }
 }
+body {
+  cursor: url("/images/my-cursor.png") 16 16, auto !important;
+}
+a,
+button,
+.btn,
+[role="button"] {
+  cursor: url("/images/my-cursor.png") 16 16, pointer !important;
+}
 :root {
   --body-bg-color: #fffaf0 !important;
 }
@@ -2524,23 +2533,4 @@ a:hover {
 .site-author-image {
   width: 120px;
   height: 120px;
-}
-body {
-  cursor: url("/images/my-cursor.cur") 16 16, auto;
-}
-a,
-button,
-.btn,
-[role="button"] {
-  cursor: url("/images/my-cursor.cur") 16 16, pointer;
-}
-button,
-.btn,
-.download-btn {
-  transition: transform 0.1s;
-}
-button:active,
-.btn:active,
-.download-btn:active {
-  transform: scale(0.95);
 }
