@@ -1221,7 +1221,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff813d;
+  background: #0d55ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2524,4 +2524,23 @@ a:hover {
 .site-author-image {
   width: 120px;
   height: 120px;
+}
+body {
+  cursor: url("/images/my-cursor.cur") 16 16, auto;
+}
+a,
+button,
+.btn,
+[role="button"] {
+  cursor: url("/images/my-cursor.cur") 16 16, pointer;
+}
+button,
+.btn,
+.download-btn {
+  transition: transform 0.1s;
+}
+button:active,
+.btn:active,
+.download-btn:active {
+  transform: scale(0.95);
 }
